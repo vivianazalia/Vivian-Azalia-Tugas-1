@@ -37,15 +37,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Life = 3;
-        Score = 0;
-        currentDelayZombie = delayZombie;
-        currentDelayHuman = delayHuman;
-        Wave = 1;
-        timeWave = 3;
-        currentTimeWave = timeWave;
-        IsGameOver = false;
-        IsDelayWave = false;
+        Initialize();
     }
 
     private void Update()
@@ -71,6 +63,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Initialize()
+    {
+        Life = 3;
+        Score = 0;
+        currentDelayZombie = delayZombie;
+        currentDelayHuman = delayHuman;
+        Wave = 1;
+        timeWave = 3;
+        currentTimeWave = timeWave;
+        IsGameOver = false;
+        IsDelayWave = false;
+    }
+
     public void GameOver(bool isOver)
     {
         IsGameOver = isOver;
@@ -91,7 +96,7 @@ public class GameManager : MonoBehaviour
                 {
                     IsDelayWave = true;
                     Wave++;
-                    obj.GetComponent<FallObject>().IncrementSpeed();
+                    IncreaseSpeedFallObject();
                 }
             }
 
@@ -107,6 +112,19 @@ public class GameManager : MonoBehaviour
             currentDelayHuman -= Time.deltaTime;
 
             DelayWave();
+        }
+    }
+
+    private void IncreaseSpeedFallObject()
+    {
+        foreach(GameObject obj in ObjectPool.Instance.zombies)
+        {
+            obj.GetComponent<FallObject>().IncreaseSpeed();
+        }
+
+        foreach (GameObject obj in ObjectPool.Instance.humans)
+        {
+            obj.GetComponent<FallObject>().IncreaseSpeed();
         }
     }
 

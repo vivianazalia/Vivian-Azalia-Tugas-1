@@ -21,15 +21,14 @@ public class ObjectPool : MonoBehaviour
     [SerializeField] private int amountPoolHuman;
     [SerializeField] private int amountPoolZombie;
 
-    [SerializeField] private SpawnObject spawnPosHuman;
-    [SerializeField] private SpawnObject spawnPosZombie;
+    [SerializeField] private SpawnObject spawnPos;
 
     private void Start()
     {
         humans = new List<GameObject>();
         for(int i = 0; i < amountPoolHuman; i++)
         {
-            GameObject tmp = Instantiate(prefabs[0], spawnPosHuman.SpawnPos(), Quaternion.identity);
+            GameObject tmp = Instantiate(prefabs[0], spawnPos.SpawnPos(), Quaternion.identity);
             tmp.SetActive(false);
             humans.Add(tmp);
         }
@@ -37,7 +36,7 @@ public class ObjectPool : MonoBehaviour
         zombies = new List<GameObject>();
         for (int i = 0; i < amountPoolHuman; i++)
         {
-            GameObject tmp = Instantiate(prefabs[1], spawnPosZombie.SpawnPos(), Quaternion.identity);
+            GameObject tmp = Instantiate(prefabs[1], spawnPos.SpawnPos(), Quaternion.identity);
             tmp.SetActive(false);
             zombies.Add(tmp);
         }
@@ -74,33 +73,25 @@ public class ObjectPool : MonoBehaviour
         if (obj.activeInHierarchy)
         {
             obj.SetActive(false);
-            if (obj.CompareTag("Enemy"))
-            {
-                obj.transform.position = spawnPosZombie.SpawnPos();
-            }
-
-            if (obj.CompareTag("Player"))
-            {
-                obj.transform.position = spawnPosHuman.SpawnPos();
-            }
+            obj.transform.position = spawnPos.SpawnPos();
         }
     }
 
     public void AddAllObjectToPool()
     {
-        foreach (GameObject obj in ObjectPool.Instance.humans)
+        foreach (GameObject obj in humans)
         {
             if (obj.activeInHierarchy)
             {
-                ObjectPool.Instance.AddToPool(obj);
+                AddToPool(obj);
             }
         }
 
-        foreach (GameObject obj in ObjectPool.Instance.zombies)
+        foreach (GameObject obj in zombies)
         {
             if (obj.activeInHierarchy)
             {
-                ObjectPool.Instance.AddToPool(obj);
+                AddToPool(obj);
             }
         }
     }

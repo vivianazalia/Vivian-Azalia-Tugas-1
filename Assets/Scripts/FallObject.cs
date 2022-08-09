@@ -19,8 +19,8 @@ public class FallObject : MonoBehaviour
         transform.position -= new Vector3(0, speed * Time.deltaTime, 0);
     }
 
-    public void IncrementSpeed()
+    public void IncreaseSpeed()
     {
-        speed++;
+        speed += 0.5f;
     }
 }
