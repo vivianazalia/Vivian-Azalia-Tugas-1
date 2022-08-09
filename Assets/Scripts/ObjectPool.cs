@@ -85,4 +85,23 @@ public class ObjectPool : MonoBehaviour
             }
         }
     }
+
+    public void AddAllObjectToPool()
+    {
+        foreach (GameObject obj in ObjectPool.Instance.humans)
+        {
+            if (obj.activeInHierarchy)
+            {
+                ObjectPool.Instance.AddToPool(obj);
+            }
+        }
+
+        foreach (GameObject obj in ObjectPool.Instance.zombies)
+        {
+            if (obj.activeInHierarchy)
+            {
+                ObjectPool.Instance.AddToPool(obj);
+            }
+        }
+    }
 }

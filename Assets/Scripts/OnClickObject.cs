@@ -6,16 +6,19 @@ public class OnClickObject : MonoBehaviour
 {
     private void OnMouseDown()
     {
-        if (gameObject.CompareTag("Player"))
+        if (!GameManager.instance.IsGameOver)
         {
-            GameManager.instance.GameOver(true);
-        }
+            if (gameObject.CompareTag("Player"))
+            {
+                GameManager.instance.GameOver(true);
+            }
 
-        if (gameObject.CompareTag("Enemy"))
-        {
-            GameManager.instance.Score++;
-        }
+            if (gameObject.CompareTag("Enemy"))
+            {
+                GameManager.instance.Score++;
+            }
 
-        ObjectPool.Instance.AddToPool(gameObject);
+            ObjectPool.Instance.AddToPool(gameObject);
+        }
     }
 }

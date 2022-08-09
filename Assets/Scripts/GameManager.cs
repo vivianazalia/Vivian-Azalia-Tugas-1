@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -26,40 +27,44 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float delayHuman;
     private float currentDelayHuman;
 
+    [SerializeField] private int totalObjectPerWave;
+    private int objectCount;
+
+    public int Wave { get; set; }
+    private float timeWave;
+    public float currentTimeWave { get; private set; }
+    public bool IsDelayWave { get; set; }
+
     private void Start()
     {
         Life = 3;
         Score = 0;
         currentDelayZombie = delayZombie;
+        currentDelayHuman = delayHuman;
+        Wave = 1;
+        timeWave = 3;
+        currentTimeWave = timeWave;
         IsGameOver = false;
+        IsDelayWave = false;
     }
 
     private void Update()
     {
-        if (!IsGameOver)
+        SpawnObject();
+
+        if (IsGameOver)
         {
-            if (currentDelayZombie <= 0)
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                //spawn object
-                GameObject obj = ObjectPool.Instance.GetObject(1);
-                obj.SetActive(true);
-                currentDelayZombie = delayZombie;
-            }
-
-            currentDelayZombie -= Time.deltaTime;
-
-            if (currentDelayHuman <= 0)
+                Application.Quit();
+            } 
+            
+            if (Input.GetKeyDown(KeyCode.Return))
             {
-                //spawn object
-                GameObject obj = ObjectPool.Instance.GetObject(0);
-                obj.SetActive(true);
-                currentDelayHuman = delayHuman;
+                RestartGame();
             }
-
-            currentDelayHuman -= Time.deltaTime;
         }
         
-
         if(Life <= 0)
         {
             IsGameOver = true;
@@ -69,5 +74,59 @@ public class GameManager : MonoBehaviour
     public void GameOver(bool isOver)
     {
         IsGameOver = isOver;
+    }
+
+    private void SpawnObject()
+    {
+        if (!IsGameOver)
+        {
+            if (currentDelayZombie <= 0 && !IsDelayWave)
+            {
+                GameObject obj = ObjectPool.Instance.GetObject(1);
+                obj.SetActive(true);
+                currentDelayZombie = delayZombie;
+
+                objectCount++;
+                if (objectCount > totalObjectPerWave)
+                {
+                    IsDelayWave = true;
+                    Wave++;
+                }
+            }
+
+            currentDelayZombie -= Time.deltaTime;
+
+            if (currentDelayHuman <= 0 && !IsDelayWave)
+            {
+                GameObject obj = ObjectPool.Instance.GetObject(0);
+                obj.SetActive(true);
+                currentDelayHuman = delayHuman;
+            }
+
+            currentDelayHuman -= Time.deltaTime;
+
+            DelayWave();
+        }
+    }
+
+    private void DelayWave()
+    {
+        if (IsDelayWave)
+        {
+            ObjectPool.Instance.AddAllObjectToPool();
+            if (currentTimeWave <= 0)
+            {
+                currentTimeWave = timeWave;
+                objectCount = 0;
+                IsDelayWave = false;
+            }
+
+            currentTimeWave -= Time.deltaTime;
+        }
+    }
+
+    private void RestartGame()
+    {
+        SceneManager.LoadScene("Gameplay");
     }
 }
