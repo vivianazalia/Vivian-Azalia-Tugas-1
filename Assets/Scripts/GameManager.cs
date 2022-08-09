@@ -91,6 +91,7 @@ public class GameManager : MonoBehaviour
                 {
                     IsDelayWave = true;
                     Wave++;
+                    obj.GetComponent<FallObject>().IncrementSpeed();
                 }
             }
 

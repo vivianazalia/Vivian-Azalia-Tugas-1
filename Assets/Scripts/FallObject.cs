@@ -12,11 +12,15 @@ public class FallObject : MonoBehaviour
         {
             Fall();
         }
-        
     }
 
     private void Fall()
     {
         transform.position -= new Vector3(0, speed * Time.deltaTime, 0);
+    }
+
+    public void IncrementSpeed()
+    {
+        speed++;
     }
 }
