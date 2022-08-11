@@ -119,12 +119,12 @@ public class GameManager : MonoBehaviour
     {
         foreach(GameObject obj in ObjectPool.Instance.zombies)
         {
-            obj.GetComponent<FallObject>().IncreaseSpeed();
+            //obj.GetComponent<>().IncreaseSpeed();
         }
 
         foreach (GameObject obj in ObjectPool.Instance.humans)
         {
-            obj.GetComponent<FallObject>().IncreaseSpeed();
+            //obj.GetComponent<FallObject>().IncreaseSpeed();
         }
     }
 
