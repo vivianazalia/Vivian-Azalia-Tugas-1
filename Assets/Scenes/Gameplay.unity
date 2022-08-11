@@ -625,7 +625,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &483919739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -655,7 +655,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
@@ -876,6 +876,59 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 548140147}
   m_CullTransparentMesh: 1
+--- !u!1 &569568855
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 569568857}
+  - component: {fileID: 569568856}
+  m_Layer: 0
+  m_Name: ZombieZigzagPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &569568856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569568855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 942470fb547e3dd47a64043d7e920e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 4923107775803110749, guid: 570fcf786b1b76947a8411c2e35b4f70, type: 3}
+  pools: []
+  amountPool: 10
+  spawnPos:
+    minX: -7.7
+    maxX: 7.7
+    minY: 6
+    maxY: 7
+  spawnTimer: 3
+--- !u!4 &569568857
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569568855}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &589554571
 GameObject:
   m_ObjectHideFlags: 0
@@ -1104,7 +1157,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &744180328
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1144,7 +1197,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &744180330
 MonoBehaviour:
@@ -1435,7 +1488,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1480226284
 GameObject:
@@ -1536,7 +1589,7 @@ RectTransform:
   - {fileID: 1644845109}
   - {fileID: 84362560}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1824,7 +1877,7 @@ GameObject:
   - component: {fileID: 1846119678}
   - component: {fileID: 1846119679}
   m_Layer: 0
-  m_Name: ObjectPool
+  m_Name: HumanPool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1843,7 +1896,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1846119679
 MonoBehaviour:
@@ -1857,14 +1910,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 942470fb547e3dd47a64043d7e920e20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabs:
-  - {fileID: 241873368130038672, guid: ed1f358f4aacfa94fb0cda9d0c4a60cd, type: 3}
-  - {fileID: 4923107775803110749, guid: 570fcf786b1b76947a8411c2e35b4f70, type: 3}
-  humans: []
-  zombies: []
-  amountPoolHuman: 10
-  amountPoolZombie: 10
-  spawnPos: {fileID: 483919739}
+  prefab: {fileID: 241873368130038672, guid: ed1f358f4aacfa94fb0cda9d0c4a60cd, type: 3}
+  pools: []
+  amountPool: 3
+  spawnPos:
+    minX: -7.7
+    maxX: 7.7
+    minY: 6
+    maxY: 7
+  spawnTimer: 2
 --- !u!1 &1909514532
 GameObject:
   m_ObjectHideFlags: 0
@@ -1961,4 +2015,57 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2143974132
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2143974134}
+  - component: {fileID: 2143974133}
+  m_Layer: 0
+  m_Name: ZombieLinierPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2143974133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2143974132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 942470fb547e3dd47a64043d7e920e20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 4923107775803110749, guid: 5fb2e227d773dc14d99440aa1b1493a7, type: 3}
+  pools: []
+  amountPool: 10
+  spawnPos:
+    minX: -7.7
+    maxX: 7.7
+    minY: 6
+    maxY: 7
+  spawnTimer: 1
+--- !u!4 &2143974134
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2143974132}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -6,6 +6,7 @@ public abstract class BaseCharacter : MonoBehaviour
 {
     [SerializeField] protected float speed;
     public abstract void Move();
+    public abstract void Destroy();
 
     public virtual void Update()
     {

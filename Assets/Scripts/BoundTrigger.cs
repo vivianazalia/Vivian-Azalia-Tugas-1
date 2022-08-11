@@ -11,6 +11,6 @@ public class BoundTrigger : MonoBehaviour
             GameManager.instance.Life--;
         }
 
-        ObjectPool.Instance.AddToPool(collision.gameObject);
+        //ObjectPool.Instance.AddToPool(collision.gameObject);
     }
 }

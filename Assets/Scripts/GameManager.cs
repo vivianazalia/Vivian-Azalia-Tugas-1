@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        SpawnObject();
+        //SpawnObject();
 
         if (IsGameOver)
         {
@@ -81,58 +81,58 @@ public class GameManager : MonoBehaviour
         IsGameOver = isOver;
     }
 
-    private void SpawnObject()
-    {
-        if (!IsGameOver)
-        {
-            if (currentDelayZombie <= 0 && !IsDelayWave)
-            {
-                GameObject obj = ObjectPool.Instance.GetObject(1);
-                obj.SetActive(true);
-                currentDelayZombie = delayZombie;
+    //private void SpawnObject()
+    //{
+    //    if (!IsGameOver)
+    //    {
+    //        if (currentDelayZombie <= 0 && !IsDelayWave)
+    //        {
+    //            //GameObject obj = ObjectPool.Instance.GetObject();
+    //            obj.SetActive(true);
+    //            currentDelayZombie = delayZombie;
+    //        
+    //            objectCount++;
+    //            if (objectCount > totalObjectPerWave)
+    //            {
+    //                IsDelayWave = true;
+    //                Wave++;
+    //                //IncreaseSpeedFallObject();
+    //            }
+    //        }
+    //
+    //        currentDelayZombie -= Time.deltaTime;
+    //
+    //        if (currentDelayHuman <= 0 && !IsDelayWave)
+    //        {
+    //            //GameObject obj = ObjectPool.Instance.GetObject();
+    //            obj.SetActive(true);
+    //            currentDelayHuman = delayHuman;
+    //        }
+    //
+    //        currentDelayHuman -= Time.deltaTime;
+    //
+    //        DelayWave();
+    //    }
+    //}
 
-                objectCount++;
-                if (objectCount > totalObjectPerWave)
-                {
-                    IsDelayWave = true;
-                    Wave++;
-                    IncreaseSpeedFallObject();
-                }
-            }
-
-            currentDelayZombie -= Time.deltaTime;
-
-            if (currentDelayHuman <= 0 && !IsDelayWave)
-            {
-                GameObject obj = ObjectPool.Instance.GetObject(0);
-                obj.SetActive(true);
-                currentDelayHuman = delayHuman;
-            }
-
-            currentDelayHuman -= Time.deltaTime;
-
-            DelayWave();
-        }
-    }
-
-    private void IncreaseSpeedFallObject()
-    {
-        foreach(GameObject obj in ObjectPool.Instance.zombies)
-        {
-            //obj.GetComponent<>().IncreaseSpeed();
-        }
-
-        foreach (GameObject obj in ObjectPool.Instance.humans)
-        {
-            //obj.GetComponent<FallObject>().IncreaseSpeed();
-        }
-    }
+    //private void IncreaseSpeedFallObject()
+    //{
+    //    foreach(GameObject obj in ObjectPool.Instance.zombies)
+    //    {
+    //        //obj.GetComponent<>().IncreaseSpeed();
+    //    }
+    //
+    //    foreach (GameObject obj in ObjectPool.Instance.humans)
+    //    {
+    //        //obj.GetComponent<FallObject>().IncreaseSpeed();
+    //    }
+    //}
 
     private void DelayWave()
     {
         if (IsDelayWave)
         {
-            ObjectPool.Instance.AddAllObjectToPool();
+            //ObjectPool.Instance.AddAllObjectToPool();
             if (currentTimeWave <= 0)
             {
                 currentTimeWave = timeWave;

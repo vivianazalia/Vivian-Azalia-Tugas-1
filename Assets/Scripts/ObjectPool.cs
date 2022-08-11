@@ -4,64 +4,60 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
-    public static ObjectPool Instance = null;
+    //public static ObjectPool Instance = null;
+    //
+    //private void Awake()
+    //{
+    //    if(Instance == null)
+    //    {
+    //        Instance = this;
+    //    }
+    //}
 
-    private void Awake()
+    [System.Serializable]
+    public struct SpawnRange
     {
-        if(Instance == null)
-        {
-            Instance = this;
-        }
+        public float minX;
+        public float maxX;
+        public float minY;
+        public float maxY;
     }
 
-    public List<GameObject> prefabs;
-    public List<GameObject> humans;
-    public List<GameObject> zombies;
+    public GameObject prefab;
+    public List<GameObject> pools;
 
-    [SerializeField] private int amountPoolHuman;
-    [SerializeField] private int amountPoolZombie;
+    [SerializeField] private int amountPool;
 
-    [SerializeField] private SpawnObject spawnPos;
+    [SerializeField] private SpawnRange spawnPos;
+
+    [SerializeField] private float spawnTimer;
+    private float currentTimeSpawn;
 
     private void Start()
     {
-        humans = new List<GameObject>();
-        for(int i = 0; i < amountPoolHuman; i++)
+        pools = new List<GameObject>();
+        for(int i = 0; i < amountPool; i++)
         {
-            GameObject tmp = Instantiate(prefabs[0], spawnPos.SpawnPos(), Quaternion.identity);
+            GameObject tmp = Instantiate(prefab, SpawnPos(), Quaternion.identity);
+            tmp.transform.SetParent(this.transform);
             tmp.SetActive(false);
-            humans.Add(tmp);
-        }
-
-        zombies = new List<GameObject>();
-        for (int i = 0; i < amountPoolHuman; i++)
-        {
-            GameObject tmp = Instantiate(prefabs[1], spawnPos.SpawnPos(), Quaternion.identity);
-            tmp.SetActive(false);
-            zombies.Add(tmp);
+            pools.Add(tmp);
         }
     }
 
-    public GameObject GetObject(int index)
+    private void Update()
     {
-        if(index == 0)
+        SpawnObject();
+    }
+
+    public GameObject GetObject()
+    {
+        for (int i = 0; i < pools.Count; i++)
         {
-            for(int i = 0; i < humans.Count; i++)
+            if (!pools[i].activeInHierarchy)
             {
-                if (!humans[i].activeInHierarchy)
-                {
-                    return humans[i];
-                }
-            }
-        } 
-        else if(index == 1)
-        {
-            for (int i = 0; i < zombies.Count; i++)
-            {
-                if (!zombies[i].activeInHierarchy)
-                {
-                    return zombies[i];
-                }
+                pools[i].SetActive(true);
+                return pools[i];
             }
         }
 
@@ -73,25 +69,37 @@ public class ObjectPool : MonoBehaviour
         if (obj.activeInHierarchy)
         {
             obj.SetActive(false);
-            obj.transform.position = spawnPos.SpawnPos();
+            obj.transform.position = SpawnPos();
         }
     }
 
     public void AddAllObjectToPool()
     {
-        foreach (GameObject obj in humans)
+        foreach (GameObject obj in pools)
         {
             if (obj.activeInHierarchy)
             {
                 AddToPool(obj);
             }
         }
+    }
 
-        foreach (GameObject obj in zombies)
+    public Vector2 SpawnPos()
+    {
+        Vector2 pos = new Vector2((Random.Range(spawnPos.minX, spawnPos.maxX)), (Random.Range(spawnPos.minY, spawnPos.maxY)));
+        return pos;
+    }
+
+    private void SpawnObject()
+    {
+        if (!GameManager.instance.IsGameOver)
         {
-            if (obj.activeInHierarchy)
+            currentTimeSpawn += Time.deltaTime;
+            if(currentTimeSpawn > spawnTimer)
             {
-                AddToPool(obj);
+                GameObject obj = GetObject();
+                if (obj == null) return;
+                currentTimeSpawn = 0;
             }
         }
     }

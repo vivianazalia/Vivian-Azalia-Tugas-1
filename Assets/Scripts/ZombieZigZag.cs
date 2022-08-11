@@ -2,19 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Zombie : BaseCharacter, IRaycastable
+public class ZombieZigZag : BaseCharacter, IRaycastable
 {
-    public override void Update()
-    {
-        base.Update();
-        OnClickObject();
-    }
-
-    public override void Move()
-    {
-        transform.position -= new Vector3(0, speed * Time.deltaTime, 0);
-        Destroy();
-    }
+    private float amplitudo;
+    [SerializeField] private float frequency;
 
     public override void Destroy()
     {
@@ -23,6 +14,14 @@ public class Zombie : BaseCharacter, IRaycastable
             GameManager.instance.Life--;
             GetComponentInParent<ObjectPool>().AddToPool(this.gameObject);
         }
+    }
+
+    public override void Move()
+    {
+        amplitudo = Random.Range(3, 10);
+        transform.position += Vector3.down * Time.deltaTime * speed;
+        transform.position += transform.right * Mathf.Sin(Time.time * frequency) * amplitudo * Time.deltaTime;
+        Destroy();
     }
 
     public void OnClickObject()
