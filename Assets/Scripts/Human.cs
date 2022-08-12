@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Human : BaseCharacter, IRaycastable, IPointerClickHandler
+public class Human : BaseCharacter, IRaycastable
 {
     public override void Update()
     {
@@ -36,10 +36,5 @@ public class Human : BaseCharacter, IRaycastable, IPointerClickHandler
                 GameManager.instance.GameOver(true);
             }
         }
-    }
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        throw new System.NotImplementedException();
     }
 }

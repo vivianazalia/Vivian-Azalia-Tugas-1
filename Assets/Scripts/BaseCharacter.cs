@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BaseCharacter : MonoBehaviour, IMovementVariation
+public abstract class BaseCharacter : MonoBehaviour
 {
     [SerializeField] protected float speed;
     [SerializeField] protected VariationType movementVariation;
+    
     public abstract void Move();
     public abstract void Destroy();
 
@@ -15,11 +16,6 @@ public abstract class BaseCharacter : MonoBehaviour, IMovementVariation
         {
            Move();
         }
-    }
-
-    public void OnMovementVariation()
-    {
-        movementVariation = VariationType.horizontal;
     }
 
     //public void IncreaseSpeed()

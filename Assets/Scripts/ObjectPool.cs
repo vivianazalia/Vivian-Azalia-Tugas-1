@@ -4,16 +4,6 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
-    //public static ObjectPool Instance = null;
-    //
-    //private void Awake()
-    //{
-    //    if(Instance == null)
-    //    {
-    //        Instance = this;
-    //    }
-    //}
-
     [System.Serializable]
     public struct SpawnRange
     {
