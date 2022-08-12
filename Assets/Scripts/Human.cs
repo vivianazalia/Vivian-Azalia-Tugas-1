@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Human : BaseCharacter, IRaycastable
+public class Human : BaseCharacter, IRaycastable, IPointerClickHandler
 {
     public override void Update()
     {
@@ -38,5 +38,8 @@ public class Human : BaseCharacter, IRaycastable
         }
     }
 
-    
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        throw new System.NotImplementedException();
+    }
 }

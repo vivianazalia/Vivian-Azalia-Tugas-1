@@ -18,9 +18,13 @@ public class ZombieZigZag : BaseCharacter, IRaycastable
 
     public override void Move()
     {
-        amplitudo = Random.Range(3, 10);
-        transform.position += Vector3.down * Time.deltaTime * speed;
-        transform.position += transform.right * Mathf.Sin(Time.time * frequency) * amplitudo * Time.deltaTime;
+        if(movementVariation == VariationType.zigzag)
+        {
+            amplitudo = Random.Range(3, 10);
+            transform.position += Vector3.down * Time.deltaTime * speed;
+            transform.position += transform.right * Mathf.Sin(Time.time * frequency) * amplitudo * Time.deltaTime;
+        }
+        
         Destroy();
     }
 
@@ -32,7 +36,6 @@ public class ZombieZigZag : BaseCharacter, IRaycastable
 
             if (ray.collider != null)
             {
-                Debug.Log("Zombie " + ray.collider.name);
                 GetComponentInParent<ObjectPool>().AddToPool(ray.collider.gameObject);
                 GameManager.instance.Score++;
             }

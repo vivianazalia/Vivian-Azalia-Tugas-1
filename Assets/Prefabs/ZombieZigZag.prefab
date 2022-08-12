@@ -147,5 +147,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  amplitudo: 7
+  movementVariation: 2
   frequency: 8

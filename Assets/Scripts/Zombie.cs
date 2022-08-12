@@ -12,7 +12,11 @@ public class Zombie : BaseCharacter, IRaycastable
 
     public override void Move()
     {
-        transform.position -= new Vector3(0, speed * Time.deltaTime, 0);
+        if (movementVariation == VariationType.vertical)
+        {
+            transform.position -= new Vector3(0, speed * Time.deltaTime, 0);
+        }
+        
         Destroy();
     }
 
@@ -33,7 +37,6 @@ public class Zombie : BaseCharacter, IRaycastable
 
             if (ray.collider != null)
             {
-                Debug.Log("Zombie " + ray.collider.name);
                 GetComponentInParent<ObjectPool>().AddToPool(ray.collider.gameObject);
                 GameManager.instance.Score++;
             }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IRaycastable
 {
-    public void OnClickObject();
+    void OnClickObject();
 
     //private void OnMouseDown()
     //{
